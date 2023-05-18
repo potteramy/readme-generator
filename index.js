@@ -1,11 +1,13 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown')
-const {buildPageTitle, buildTableOfContents} = require("./generate")
+const {buildPageTitle, buildTableOfContents, generateMarkdown} = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 // const questions = [
-  inquirer
+
+
+
+  inquirer //works
     .prompt([
   {
     type: 'input',
@@ -62,13 +64,27 @@ const {buildPageTitle, buildTableOfContents} = require("./generate")
   }
 ])
 
-// ];
+// From activity:   
+// .then((data) => {
+//   const filename = `${data.name.toLowerCase().split(' ').join('')}.json`;
+
+//   fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) =>
+//     err ? console.log(err) : console.log('Success!')
+//   );
+// });
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  fileName = README.md
-  fs.writeFile('README.md')
-}
+
+ .then(data => { 
+  const content = generateMarkdown(data);
+  fs.writeFile("./readme/README.md", content, err => {
+  if (err) 
+    console.log(err);
+  else {
+    console.log("Success!")
+  }
+});
+});
 
 // TODO: Create a function to initialize app
 function init() {}
